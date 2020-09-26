@@ -1,0 +1,23 @@
+@using Articulate
+@using Articulate.Models
+@using Umbraco.Core
+@using Umbraco.Core.Security
+@using Umbraco.Web
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Articulate.Models.TagListModel>
+    @{
+    Layout = "Master.cshtml";
+    ViewBag.CssWrapperClass = "demo-blog--blogpost";
+    var asArray = Model.Tags.ToArray();
+    }
+
+
+<div class="mdl-card mdl-cell mdl-cell--4-col">
+    <ul>
+        @for (var i = 0; i < asArray.Length; i++)
+        {
+        <li>
+            <a href="#tag-@asArray[i].HtmlId">@asArray[i].TagName</a> - (@asArray[i].PostCount)
+        </li>
+        }
+    </ul>
+</div>

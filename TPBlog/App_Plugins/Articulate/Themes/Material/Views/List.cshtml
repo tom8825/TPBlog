@@ -1,0 +1,77 @@
+@using System.Text
+@using Articulate
+@using Articulate.Models
+@using Umbraco.Core
+@using Umbraco.Core.Cache;
+@using Umbraco.Core.Security
+@using Umbraco.Web
+@using Umbraco.Web.Models
+@inherits UmbracoViewPage<Articulate.Models.ListModel>
+@{
+    Layout = "Master.cshtml";
+    ViewBag.CssWrapperClass = Model.ContentType.Alias == "ArticulateArchive" ? null : "demo-blog--blogpost";
+}
+
+    @if (!Model.Children.Any())
+    {
+    <div class="mdl-card mdl-cell mdl-cell--12-col comments">
+
+        @Html.ThemedPartial(Model, "SearchBox")
+
+        @if (!Request.QueryString["term"].IsNullOrWhiteSpace())
+        {
+        <div class="mdl-card__media mdl-color-text--grey-50">
+            <h3>No blog posts found</h3>
+        </div>
+        }
+    </div>
+    }
+    else
+    {
+    var doneFirst = false;
+    foreach (var post in Model.Posts)
+    {
+      if (!doneFirst && Model.ContentType.Alias == "ArticulateArchive")
+    {
+    doneFirst = true;
+
+    <div class="mdl-card mdl-cell mdl-cell--12-col first-post">
+        @PostInfo(post, false)
+    </div>
+
+    //@Html.ThemedPartial(Model, "TitleTile")
+    }
+    else
+    {
+    <div class="mdl-card mdl-cell mdl-cell--6-col">
+        @PostInfo(post)
+    </div>
+    }
+    }
+
+    @Html.ThemedPartial(Model, "Pager", Model.Pages)
+    }
+
+
+</div>
+
+
+
+
+
+
+@helper PostInfo(PostModel post, bool withExcerpt = true)
+{
+    @Html.ThemedPartial(Model, "PostImageHeader", post)
+
+    if (withExcerpt)
+    {
+        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            @post.Excerpt&hellip;
+        </div>
+
+        <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+            @Html.ThemedPartial(Model, "AuthorInfo", post)
+        </div>
+    }
+}

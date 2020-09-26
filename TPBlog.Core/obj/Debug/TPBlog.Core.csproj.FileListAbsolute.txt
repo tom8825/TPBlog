@@ -1,0 +1,5 @@
+C:\Users\TomParker\Desktop\Repos\TPBlog\TPBlog.Core\bin\Debug\TPBlog.Core.dll
+C:\Users\TomParker\Desktop\Repos\TPBlog\TPBlog.Core\bin\Debug\TPBlog.Core.pdb
+C:\Users\TomParker\Desktop\Repos\TPBlog\TPBlog.Core\obj\Debug\TPBlog.Core.csprojAssemblyReference.cache
+C:\Users\TomParker\Desktop\Repos\TPBlog\TPBlog.Core\obj\Debug\TPBlog.Core.dll
+C:\Users\TomParker\Desktop\Repos\TPBlog\TPBlog.Core\obj\Debug\TPBlog.Core.pdb

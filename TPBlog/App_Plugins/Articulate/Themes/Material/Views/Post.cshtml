@@ -1,0 +1,49 @@
+@using Articulate
+@using Articulate.Models
+@using Umbraco.Core
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<Articulate.Models.PostModel>
+@{
+    Layout = "Master.cshtml";
+    ViewBag.CssWrapperClass = "demo-blog--blogpost";
+}
+
+
+<div class="demo-back">
+    <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="@Model.RootBlogNode.Url" title="go back" role="button">
+        <i class="material-icons" role="presentation">arrow_back</i>
+    </a>
+</div>
+<div class="demo-blog__posts mdl-grid">
+    <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+        
+        @Html.ThemedPartial(Model, "PostImageHeader", Model)
+
+        <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+            @Html.ThemedPartial(Model, "AuthorInfo", Model)            
+            <div class="section-spacer"></div>
+            <div class="meta__favorites">
+                <a class="mdl-color-text--grey-700" href="@Model.Url#disqus_thread" data-disqus-identifier="@Model.Key"></a>
+                <a class="mdl-color-text--grey-700" href="@Model.Url#disqus_thread" data-disqus-identifier="@Model.Key"><i class="material-icons" role="presentation">comment</i></a>
+                <span class="visuallyhidden">comments</span>
+            </div>
+            
+        </div>
+        <div class="mdl-color-text--grey-700 mdl-card__supporting-text">
+            @Model.Body
+        </div>
+        <div class="mdl-color-text--grey-7400 mdl-card__supporting-text meta">           
+            <div class="post-tags">
+                <div>
+                    <span>Tags:</span>
+                    @Html.ListTags(Model,
+                @<a class="mdl-color-text--accent" href="@Url.ArticulateTagUrl(Model, @item)">@item</a>)
+                </div>
+                <div>
+                    <span>Categories:</span>
+                    @Html.ListCategories(Model,
+                @<a class="mdl-color-text--accent" href="@Url.ArticulateCategoryUrl(Model, @item)">@item</a>, " | ")
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
